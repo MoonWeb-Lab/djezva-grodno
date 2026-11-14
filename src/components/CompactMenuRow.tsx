@@ -22,8 +22,8 @@ export const CompactMenuRow: React.FC<CompactMenuRowProps> = ({
   );
 
   return (
-    <article className="bg-white rounded-[20px] p-4 border border-[rgba(30,22,18,0.12)] shadow-sm hover:shadow-md transition-all duration-200">
-      <div className="flex flex-col gap-2">
+    <article className="bg-white rounded-[20px] p-4 border border-[rgba(30,22,18,0.12)] shadow-sm hover:shadow-md transition-all duration-200 h-full flex flex-col justify-between">
+      <div className="flex flex-col gap-2 flex-1 justify-between">
         {/* Top Badges / Metadata */}
         <div className="flex items-center justify-between gap-2 flex-wrap">
           <div className="flex items-center gap-1.5">

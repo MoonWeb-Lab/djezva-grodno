@@ -9,7 +9,7 @@ export default defineConfig({
   fullyParallel: false,
   reporter: 'list',
   use: {
-    baseURL: 'http://127.0.0.1:5173',
+    baseURL: 'http://127.0.0.1:5173/djezva-grodno/',
     trace: 'on-first-retry',
     channel: 'msedge',
     viewport: { width: 390, height: 844 },

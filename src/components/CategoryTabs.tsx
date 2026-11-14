@@ -32,11 +32,11 @@ export const CategoryTabs: React.FC<CategoryTabsProps> = ({
   return (
     <nav
       aria-label="Категории меню"
-      className="sticky top-0 z-30 w-full bg-[#F6F2EB]/95 backdrop-blur-md border-b border-[#1E1612]/8 py-2.5 px-3"
+      className="sticky top-0 z-30 w-full bg-[#F6F2EB]/95 backdrop-blur-md border-b border-[#1E1612]/8 py-2.5 px-3 md:px-8"
     >
       <div
         ref={scrollContainerRef}
-        className="flex items-center gap-1.5 overflow-x-auto no-scrollbar scroll-smooth"
+        className="flex items-center gap-1.5 md:gap-2.5 overflow-x-auto no-scrollbar scroll-smooth md:justify-center"
       >
         {categories.map((category) => {
           const isActive = activeCategory === category.id;

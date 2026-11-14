@@ -22,6 +22,7 @@ import type {
 import { formatBelarusPhone, validateOrderForm } from '../services/validation';
 import { sendOrderToTelegram } from '../services/telegram';
 import type { SendOrderResult } from '../services/telegram';
+import { useMediaQuery } from '../hooks/useMediaQuery';
 
 interface CartDrawerProps {
   isOpen: boolean;
@@ -44,6 +45,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
   onRemoveItem,
   onOrderSuccess,
 }) => {
+  const isDesktop = useMediaQuery('(min-width: 768px)');
   const [formData, setFormData] = useState<OrderFormData>({
     customerName: '',
     phone: '',
@@ -139,7 +141,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4">
+        <div className="fixed inset-0 z-50 flex items-end md:items-stretch md:justify-end p-0">
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -149,13 +151,13 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
             className="fixed inset-0 bg-black/60 backdrop-blur-sm"
           />
 
-          {/* Drawer Sheet */}
+          {/* Drawer Sheet (Bottom sheet on mobile, right panel on desktop) */}
           <motion.div
-            initial={{ y: '100%' }}
-            animate={{ y: 0 }}
-            exit={{ y: '100%' }}
+            initial={isDesktop ? { x: '100%', y: 0 } : { y: '100%', x: 0 }}
+            animate={{ x: 0, y: 0 }}
+            exit={isDesktop ? { x: '100%', y: 0 } : { y: '100%', x: 0 }}
             transition={{ type: 'spring', stiffness: 380, damping: 32 }}
-            className="relative w-full max-w-[430px] max-h-[92vh] bg-[#F6F2EB] rounded-t-[28px] sm:rounded-[28px] shadow-2xl flex flex-col overflow-hidden z-10 border border-[#1E1612]/10"
+            className="relative w-full max-w-[430px] md:max-w-none md:w-[420px] max-h-[92vh] md:max-h-full h-auto md:h-full bg-[#F6F2EB] rounded-t-[28px] md:rounded-none md:rounded-l-[28px] shadow-2xl flex flex-col overflow-hidden z-10 border-t md:border-t-0 md:border-l border-[#1E1612]/10"
           >
             {/* Top Bar with Grab Handle & Title */}
             <div className="bg-white px-4 pt-3 pb-3 border-b border-[#1E1612]/8 flex items-center justify-between">

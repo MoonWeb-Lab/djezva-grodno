@@ -52,6 +52,16 @@ export const App: React.FC = () => {
     return MENU_ITEMS.filter((item) => item.category === activeCategory);
   }, [activeCategory]);
 
+  // Split into photo cards (magazine grid) and compact rows (fast order grid)
+  const photoItems = useMemo(
+    () => displayedItems.filter((item) => Boolean(item.image)),
+    [displayedItems]
+  );
+  const compactItems = useMemo(
+    () => displayedItems.filter((item) => !item.image),
+    [displayedItems]
+  );
+
   // Handle direct "В ЗАКАЗ" click
   const handleQuickAdd = (item: MenuItem) => {
     // If item has volumes, select the first volume
@@ -84,11 +94,11 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#ECE6DC] flex justify-center py-0 sm:py-6 sm:px-4">
-      {/* Mobile-first centered frame (390–430px wide) */}
-      <main className="w-full max-w-[430px] min-h-screen sm:min-h-[920px] bg-[#F6F2EB] shadow-2xl relative flex flex-col sm:rounded-[36px] overflow-hidden border-x border-[#1E1612]/8">
+    <div className="min-h-screen bg-[#ECE6DC] flex justify-center py-0 sm:py-6 sm:px-4 md:px-8">
+      {/* Container: 390–430px on mobile, expanded to max-w-5xl on tablet/desktop */}
+      <main className="w-full max-w-[430px] md:max-w-5xl min-h-screen sm:min-h-[920px] bg-[#F6F2EB] shadow-2xl relative flex flex-col sm:rounded-[36px] overflow-hidden border-x border-[#1E1612]/8">
         {/* Top Brand Header */}
-        <header className="px-4 py-3 bg-[#FAF7F2] border-b border-[#1E1612]/6 flex items-center justify-between sticky top-0 z-20">
+        <header className="px-4 md:px-8 py-3.5 bg-[#FAF7F2] border-b border-[#1E1612]/6 flex items-center justify-between sticky top-0 z-20">
           <div className="flex items-center gap-2.5">
             <img
               src={assetUrl('images/logo.jpg')}
@@ -133,31 +143,50 @@ export const App: React.FC = () => {
           />
         </div>
 
-        {/* Menu Items Showcase */}
-        <div className="px-3 py-4 space-y-4 flex-1">
-          {displayedItems.map((item, index) => {
-            // Render rich Magazine Card if image exists, otherwise clean Compact Row
-            return item.image ? (
-              <MenuCard
-                key={item.id}
-                item={item}
-                index={index}
-                onAddToCart={handleQuickAdd}
-                onCustomize={handleOpenCustomizer}
-              />
-            ) : (
-              <CompactMenuRow
-                key={item.id}
-                item={item}
-                onAddToCart={handleQuickAdd}
-                onCustomize={handleOpenCustomizer}
-              />
-            );
-          })}
+        {/* Menu Items Showcase: Responsive multi-column layout */}
+        <div className="px-3 md:px-8 py-4 space-y-6 flex-1">
+          {/* Photo Cards Grid: 1 col on mobile, 2 cols on md:, 3 cols on lg: */}
+          {photoItems.length > 0 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {photoItems.map((item, index) => (
+                <MenuCard
+                  key={item.id}
+                  item={item}
+                  index={index}
+                  onAddToCart={handleQuickAdd}
+                  onCustomize={handleOpenCustomizer}
+                />
+              ))}
+            </div>
+          )}
+
+          {/* Compact Rows Grid: 1 col on mobile, 2 cols on desktop (md:) */}
+          {compactItems.length > 0 && (
+            <div className="space-y-3">
+              {photoItems.length > 0 && (
+                <div className="pt-2 flex items-center gap-2">
+                  <span className="text-[12px] font-bold tracking-wider text-[#8C3B2B] uppercase">
+                    Кофе и напитки бара
+                  </span>
+                  <div className="flex-1 h-[1px] bg-[#1E1612]/8" />
+                </div>
+              )}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {compactItems.map((item) => (
+                  <CompactMenuRow
+                    key={item.id}
+                    item={item}
+                    onAddToCart={handleQuickAdd}
+                    onCustomize={handleOpenCustomizer}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Bistro Footer */}
-        <footer className="mt-8 px-4 py-8 bg-[#FAF7F2] border-t border-[#1E1612]/8 text-center text-[#6E655F]">
+        <footer className="mt-8 px-4 md:px-8 py-8 bg-[#FAF7F2] border-t border-[#1E1612]/8 text-center text-[#6E655F]">
           <div className="flex items-center justify-center gap-2 mb-2">
             <img
               src={assetUrl('images/logo.jpg')}

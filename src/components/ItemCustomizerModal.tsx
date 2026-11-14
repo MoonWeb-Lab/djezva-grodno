@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Plus, Minus, Check } from 'lucide-react';
+import { useMediaQuery } from '../hooks/useMediaQuery';
 import type {
   MenuItem,
   VolumeOption,
@@ -26,11 +27,11 @@ export const ItemCustomizerModal: React.FC<ItemCustomizerModalProps> = ({
   onClose,
   onAddToCart,
 }) => {
-  if (!item) return null;
+  const isDesktop = useMediaQuery('(min-width: 768px)');
 
   // Selected volume
-  const [selectedVolume, setSelectedVolume] = useState<VolumeOption | undefined>(
-    item.options?.volumes ? item.options.volumes[0] : undefined
+  const [selectedVolume, setSelectedVolume] = useState<VolumeOption | undefined>(() =>
+    item?.options?.volumes ? item.options.volumes[0] : undefined
   );
 
   // Selected milk
@@ -48,8 +49,21 @@ export const ItemCustomizerModal: React.FC<ItemCustomizerModalProps> = ({
   // Comment
   const [comment, setComment] = useState('');
 
+  // Reset state when item changes
+  React.useEffect(() => {
+    if (item) {
+      setSelectedVolume(item.options?.volumes ? item.options.volumes[0] : undefined);
+      setSelectedMilk(undefined);
+      setSelectedSyrups([]);
+      setSelectedAddons([]);
+      setQuantity(1);
+      setComment('');
+    }
+  }, [item]);
+
   // Live Unit Price Calculation
   const unitPrice = useMemo(() => {
+    if (!item) return 0;
     let p = selectedVolume ? selectedVolume.price : item.basePrice;
     if (selectedMilk) p += selectedMilk.price;
     if (selectedSyrups.length > 0) {
@@ -60,6 +74,8 @@ export const ItemCustomizerModal: React.FC<ItemCustomizerModalProps> = ({
     }
     return p;
   }, [item, selectedVolume, selectedMilk, selectedSyrups, selectedAddons]);
+
+  if (!item) return null;
 
   const totalPrice = unitPrice * quantity;
 
@@ -97,7 +113,7 @@ export const ItemCustomizerModal: React.FC<ItemCustomizerModalProps> = ({
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4">
+        <div className="fixed inset-0 z-50 flex items-end md:items-center justify-center p-0 md:p-4">
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -107,13 +123,13 @@ export const ItemCustomizerModal: React.FC<ItemCustomizerModalProps> = ({
             className="fixed inset-0 bg-black/60 backdrop-blur-sm"
           />
 
-          {/* Modal Card / Bottom Sheet */}
+          {/* Modal Card / Bottom Sheet on mobile, Centered Modal on desktop */}
           <motion.div
-            initial={{ y: '100%', opacity: 0.5 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: '100%', opacity: 0 }}
+            initial={isDesktop ? { scale: 0.95, opacity: 0 } : { y: '100%', opacity: 0.5 }}
+            animate={isDesktop ? { scale: 1, opacity: 1 } : { y: 0, opacity: 1 }}
+            exit={isDesktop ? { scale: 0.95, opacity: 0 } : { y: '100%', opacity: 0 }}
             transition={{ type: 'spring', stiffness: 380, damping: 32 }}
-            className="relative w-full max-w-[430px] max-h-[90vh] bg-white rounded-t-[28px] sm:rounded-[28px] shadow-2xl flex flex-col overflow-hidden z-10 border border-[#1E1612]/10"
+            className="relative w-full max-w-[430px] md:max-w-md max-h-[90vh] md:max-h-[85vh] bg-white rounded-t-[28px] md:rounded-[28px] shadow-2xl flex flex-col overflow-hidden z-10 border border-[#1E1612]/10"
           >
             {/* Header */}
             <div className="flex items-start justify-between p-4 pb-3 border-b border-[#1E1612]/8">

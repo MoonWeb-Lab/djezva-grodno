@@ -17,10 +17,10 @@ test.describe('Djezva Mobile SPA - End to End Order Flow & Validation', () => {
     // Verify Brand Header & Hero
     await expect(page.getByText('ДЖЕЗВА').first()).toBeVisible();
     await expect(page.getByText('Гродно, ул. Советская, 5').first()).toBeVisible();
-    await expect(page.getByText('Кофе на песке и блинная во дворике')).toBeVisible();
+    await expect(page.getByText('Кофе на песке и блинная во дворике').first()).toBeVisible();
 
     // Verify background video
-    const video = page.locator('video');
+    const video = page.locator('video').first();
     await expect(video).toBeVisible();
 
     // 3. Category Switching

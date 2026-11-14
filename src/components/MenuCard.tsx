@@ -19,7 +19,7 @@ export const MenuCard: React.FC<MenuCardProps> = ({
   const isPriority = index < 2;
 
   return (
-    <article className="group bg-white rounded-[24px] overflow-hidden border border-[rgba(30,22,18,0.12)] shadow-sm hover:shadow-md transition-all duration-300 flex flex-col">
+    <article className="group bg-white rounded-[24px] overflow-hidden border border-[rgba(30,22,18,0.12)] shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col justify-between">
       {/* Top Photo with Floating Capsules */}
       {item.image && (
         <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#FAF7F2]">

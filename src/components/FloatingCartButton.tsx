@@ -21,14 +21,14 @@ export const FloatingCartButton: React.FC<FloatingCartButtonProps> = ({
           animate={{ y: 0, opacity: 1, scale: 1 }}
           exit={{ y: 80, opacity: 0, scale: 0.95 }}
           transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-          className="fixed bottom-4 inset-x-0 mx-auto max-w-[430px] px-4 z-40 pointer-events-auto"
+          className="fixed bottom-4 inset-x-0 mx-auto max-w-[430px] px-4 z-40 pointer-events-auto md:bottom-8 md:right-8 md:left-auto md:mx-0 md:max-w-none md:w-auto md:min-w-[280px]"
         >
           <motion.button
             data-testid="floating-cart-btn"
             whileTap={{ scale: 0.97 }}
             onClick={onClick}
             aria-label={`Корзина: ${totalCount} позиций на сумму ${totalPrice.toFixed(1)} BYN`}
-            className="w-full flex items-center justify-between bg-[#8C3B2B] hover:bg-[#783023] text-white px-5 py-3.5 rounded-2xl shadow-xl border border-white/15 backdrop-blur-md transition-colors"
+            className="w-full flex items-center justify-between gap-4 bg-[#8C3B2B] hover:bg-[#783023] text-white px-5 py-3.5 rounded-2xl shadow-xl border border-white/15 backdrop-blur-md transition-colors cursor-pointer"
           >
             <div className="flex items-center gap-2.5">
               <div className="relative flex items-center justify-center w-7 h-7 rounded-full bg-white/20">
