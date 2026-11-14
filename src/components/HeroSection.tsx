@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { MapPin, Clock, ArrowDown } from 'lucide-react';
 import { InstagramIcon } from './InstagramIcon';
+import { assetUrl } from '../utils/assets';
 
 interface HeroSectionProps {
   onExploreClick: () => void;
@@ -18,9 +19,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onExploreClick }) => {
           muted
           playsInline
           className="absolute inset-0 h-full w-full object-cover"
-          poster="/images/logo.jpg"
+          poster={assetUrl('images/logo.jpg')}
         >
-          <source src="/videos/atmosphere.mp4" type="video/mp4" />
+          <source src={assetUrl('videos/atmosphere.mp4')} type="video/mp4" />
         </video>
 
         {/* Ambient Dark Gradient Overlay */}

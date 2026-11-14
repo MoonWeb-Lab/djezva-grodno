@@ -1,4 +1,5 @@
 import type { MenuCategory, MenuItem, ModifierOption } from '../types/menu';
+import { assetUrl } from '../utils/assets';
 
 export const MENU_CATEGORIES: MenuCategory[] = [
   { id: 'all', label: 'Всё меню' },
@@ -41,7 +42,7 @@ export const MENU_ITEMS: MenuItem[] = [
     basePrice: 25,
     badge: '★ ВЫБОР ДЖЕЗВЫ',
     pairing: 'Идеально с: Капучино 300 мл',
-    image: '/images/crepe-bolognese.jpg',
+    image: assetUrl('images/crepe-bolognese.jpg'),
     imagePosition: 'center 40%',
     options: {
       addons: FOOD_ADDON_OPTIONS,
@@ -55,7 +56,7 @@ export const MENU_ITEMS: MenuItem[] = [
     weight: '200 г',
     basePrice: 18,
     pairing: 'Идеально с: Флэт Уайт',
-    image: '/images/crepe-salmon.jpg',
+    image: assetUrl('images/crepe-salmon.jpg'),
     imagePosition: 'center 50%',
     options: {
       addons: FOOD_ADDON_OPTIONS,
@@ -84,7 +85,7 @@ export const MENU_ITEMS: MenuItem[] = [
     weight: '360 г',
     basePrice: 18,
     pairing: 'Идеально с: Фильтр-кофе',
-    image: '/images/pancakes-bacon.jpg',
+    image: assetUrl('images/pancakes-bacon.jpg'),
     imagePosition: 'center 60%',
     options: {
       addons: FOOD_ADDON_OPTIONS,
@@ -98,7 +99,7 @@ export const MENU_ITEMS: MenuItem[] = [
     weight: '320 г',
     basePrice: 18,
     pairing: 'Идеально с: Раф с розовой солью',
-    image: '/images/pancakes-cinnabon.jpg',
+    image: assetUrl('images/pancakes-cinnabon.jpg'),
     imagePosition: 'center 65%',
     options: {
       addons: [
@@ -135,7 +136,7 @@ export const MENU_ITEMS: MenuItem[] = [
     basePrice: 25,
     badge: '★ ВЫБОР ДЖЕЗВЫ',
     pairing: 'Идеально с: Крафтовый чай',
-    image: '/images/draniki-mushrooms.jpg',
+    image: assetUrl('images/draniki-mushrooms.jpg'),
     imagePosition: 'center 60%',
     options: {
       addons: FOOD_ADDON_OPTIONS,
@@ -149,7 +150,7 @@ export const MENU_ITEMS: MenuItem[] = [
     weight: '350 г',
     basePrice: 22,
     pairing: 'Идеально с: Питерский фильтр-кофе',
-    image: '/images/draniki-pork.jpg',
+    image: assetUrl('images/draniki-pork.jpg'),
     imagePosition: 'center 50%',
     options: {
       addons: FOOD_ADDON_OPTIONS,
@@ -163,7 +164,7 @@ export const MENU_ITEMS: MenuItem[] = [
     weight: '260 г',
     basePrice: 18,
     pairing: 'Идеально с: Капучино с карамелью',
-    image: '/images/bagel-salmon.jpg',
+    image: assetUrl('images/bagel-salmon.jpg'),
     imagePosition: 'center 45%',
     options: {
       addons: FOOD_ADDON_OPTIONS,
@@ -177,7 +178,7 @@ export const MENU_ITEMS: MenuItem[] = [
     weight: '280 г',
     basePrice: 16,
     pairing: 'Идеально с: Латте 350 мл',
-    image: '/images/syrniki-cherry.jpg',
+    image: assetUrl('images/syrniki-cherry.jpg'),
     imagePosition: 'center 55%',
     options: {
       addons: [
@@ -195,7 +196,7 @@ export const MENU_ITEMS: MenuItem[] = [
     basePrice: 12,
     badge: 'ВЫПЕКАЕМ ДО 14:00',
     pairing: 'Идеально с: Флэт Уайт',
-    image: '/images/croissant-salmon.jpg',
+    image: assetUrl('images/croissant-salmon.jpg'),
     imagePosition: 'center 50%',
     options: {
       addons: FOOD_ADDON_OPTIONS,

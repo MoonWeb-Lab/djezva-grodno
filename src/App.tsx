@@ -5,6 +5,7 @@ import { MENU_CATEGORIES, MENU_ITEMS } from './data/menuData';
 import type { MenuItem, MenuCategoryId, CartItemModifierSelection, OrderFormData } from './types/menu';
 import { useCart } from './hooks/useCart';
 import type { SendOrderResult } from './services/telegram';
+import { assetUrl } from './utils/assets';
 
 import { HeroSection } from './components/HeroSection';
 import { CategoryTabs } from './components/CategoryTabs';
@@ -90,7 +91,7 @@ export const App: React.FC = () => {
         <header className="px-4 py-3 bg-[#FAF7F2] border-b border-[#1E1612]/6 flex items-center justify-between sticky top-0 z-20">
           <div className="flex items-center gap-2.5">
             <img
-              src="/images/logo.jpg"
+              src={assetUrl('images/logo.jpg')}
               alt="Джезва логотип"
               className="w-8 h-8 rounded-full object-cover border border-[#1E1612]/10"
             />
@@ -159,7 +160,7 @@ export const App: React.FC = () => {
         <footer className="mt-8 px-4 py-8 bg-[#FAF7F2] border-t border-[#1E1612]/8 text-center text-[#6E655F]">
           <div className="flex items-center justify-center gap-2 mb-2">
             <img
-              src="/images/logo.jpg"
+              src={assetUrl('images/logo.jpg')}
               alt="Джезва лого"
               className="w-7 h-7 rounded-full border border-[#1E1612]/10"
             />
